@@ -11,11 +11,13 @@ function App() {
      <h1>olá, Brasil!</h1>
      <InfoAluno/>
 
-<br></br>
-     <InfoCurso/>
+<br>
 
+
+</br>
+     <InfoCurso/>
 <br></br>
-    <AdicionarAluno>
+      <AdicionarAluno />
     </>
   )
 }
