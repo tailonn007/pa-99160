@@ -1,0 +1,39 @@
+/* estilo para info-curso */
+
+.info-curso {
+    background: linear-gradient(135deg, #ffffff, #f5f5f5);
+    border-left: 8px solid #0033a0;
+    border-right: 8px solid #926565;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 40px auto;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.info-curso h2 {
+    text-align: center;
+    color: #2900e0;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #0033a0;
+    padding-bottom: 5px;
+}
+
+.info-curso p {
+    font-size: 16px;
+    color: #b80b0b;
+    margin: 10px 0;
+}
+
+.info-curso p::before {
+    content: " ";
+    color: #0033a0;
+    font-weight: bold;
+}
+
+/* efeito hover */
+.info-curso:hover {
+    transform: translateY(-5px);
+    transition: 0.3s ease;
+}
