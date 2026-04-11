@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Elenco - Meu Time</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>⚽ Escalação do Time</h2>
+        
+        <div class="form-group">
+            <label>Nome do Jogador:</label>
+            <input type="text" id="nome" placeholder="Ex: Neymar Jr">
+        </div>
+
+        <div class="form-group">
+            <label>Idade:</label>
+            <input type="number" id="idade" placeholder="Ex: 25">
+        </div>
+
+        <div class="form-group">
+            <label>Número da Camisa:</label>
+            <input type="number" id="numero" placeholder="Ex: 10">
+        </div>
+
+        <div class="form-group">
+            <label>Posição:</label>
+            <select id="posicao">
+                <option value="Goleiro">Goleiro</option>
+                <option value="Zagueiro">Zagueiro</option>
+                <option value="Lateral">Lateral</option>
+                <option value="Meio-Campo">Meio-Campo</option>
+                <option value="Atacante">Atacante</option>
+            </select>
+        </div>
+
+        <button onclick="adicionarJogador()">Contratar Jogador</button>
+
+        <table id="tabelaJogadores">
+            <thead>
+                <tr>
+                    <th>Nº</th>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Posição</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script>
+        function adicionarJogador() {
+            const nome = document.getElementById('nome').value;
+            const idade = document.getElementById('idade').value;
+            const numero = document.getElementById('numero').value;
+            const posicao = document.getElementById('posicao').value;
+
+            if (!nome || !idade || !numero) {
+                alert("Por favor, preencha todos os campos!");
+                return;
+            }
+
+            const tabela = document.getElementById('tabelaJogadores').getElementsByTagName('tbody')[0];
+            const novaLinha = tabela.insertRow();
+
+            novaLinha.insertCell(0).innerText = numero;
+            novaLinha.insertCell(1).innerText = nome;
+            novaLinha.insertCell(2).innerText = idade;
+            novaLinha.insertCell(3).innerText = posicao;
+
+            document.getElementById('nome').value = "";
+            document.getElementById('idade').value = "";
+            document.getElementById('numero').value = "";
+        }
+    </script>
+</body>
+</html>
