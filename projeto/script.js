@@ -1,106 +1,78 @@
-// --- Elementos de Entrada (Inputs) ---
+// Inputs
 const inNomeCompleto = document.getElementById('nomeAtleta');
 const inNomeCamisa = document.getElementById('nomeCamisa');
 const inIdade = document.getElementById('idade');
 const inNumero = document.getElementById('numero');
 const inPosicao = document.getElementById('posicao');
+const inNacionalidade = document.getElementById('nacionalidade');
+const inHabilidade = document.getElementById('habilidade');
+const inResumo = document.getElementById('resumo');
 const btnEscalar = document.getElementById('btnEscalar');
 
-// --- Elementos de Saída (Preview na Camisa) ---
+// Preview Elements
 const printNome = document.getElementById('printNome');
 const printNumero = document.getElementById('printNumero');
 const printIdade = document.getElementById('printIdade');
 const printPosicao = document.getElementById('printPosicao');
 const camisaVisual = document.getElementById('camisaVisual');
-
 const gridElenco = document.getElementById('gridElenco');
 
-
-// --- FUNÇÃO 1: Atualização em Tempo Real (AÇÃO!) ---
-// 'input' detecta qualquer mudança enquanto você digita
-inNomeCamisa.addEventListener('input', () => {
-    // Força maiúsculas e limita tamanho visualmente se necessário
-    let texto = inNomeCamisa.value.toUpperCase();
-    
-    if (texto.length === 0) {
-        printNome.innerText = "SEU NOME";
-    } else {
-        printNome.innerText = texto;
-    }
-});
-
-inNumero.addEventListener('input', () => {
-    let num = inNumero.value;
-    // Limita entre 1 e 99
-    if (num > 99) inNumero.value = 99;
-    if (num < 1 && num.length > 0) inNumero.value = 1;
-    
-    printNumero.innerText = inNumero.value || "?";
-});
-
-// Atualiza info adicional quando mudam
+// Live Preview Events
+inNomeCamisa.addEventListener('input', () => printNome.innerText = inNomeCamisa.value.toUpperCase() || "SEU NOME");
+inNumero.addEventListener('input', () => printNumero.innerText = inNumero.value || "?");
 inIdade.addEventListener('input', () => printIdade.innerText = inIdade.value || "--");
 inPosicao.addEventListener('change', () => printPosicao.innerText = inPosicao.value);
 
-
-// --- FUNÇÃO 2: Escalar o Jogador ---
-btnEscalar.addEventListener('click', escalarJogador);
-
-function escalarJogador() {
-    // 1. Capturar valores finais
-    const dados = {
+// Escalar Jogador
+btnEscalar.addEventListener('click', () => {
+    const atleta = {
         nomeCompleto: inNomeCompleto.value,
         nomeCamisa: inNomeCamisa.value.toUpperCase(),
         numero: inNumero.value,
         idade: inIdade.value,
-        posicao: inPosicao.value
+        posicao: inPosicao.value,
+        nacionalidade: inNacionalidade.value || "Brasileiro",
+        habilidade: inHabilidade.value || "Técnica",
+        resumo: inResumo.value || "Sem resumo disponível."
     };
 
-    // 2. Validação básica
-    if (!dados.nomeCompleto || !dados.nomeCamisa || !dados.numero) {
-        alert("⚠️ Técnico, precisamos de Nome, Nome na Camisa e Número!");
+    if (!atleta.nomeCompleto || !atleta.nomeCamisa || !atleta.numero) {
+        alert("⚠️ Técnico, preencha Nome, Nome na Camisa e Número!");
         return;
     }
 
-    // 3. Efeito Visual de "Ação" na camisa de preview (ela gira)
+    // Efeito de giro
     camisaVisual.style.transform = "rotateY(360deg)";
     
-    // Espera a animação acabar (0.5s) para adicionar na lista e limpar
     setTimeout(() => {
         camisaVisual.style.transform = "rotateY(0deg)";
-        adicionarAoElenco(dados);
+        adicionarAoElenco(atleta);
         limparFormulario();
     }, 500);
-}
+});
 
-// --- FUNÇÃO 3: Criar Miniatura no Elenco ---
 function adicionarAoElenco(atleta) {
-    // Criar o container da miniatura
-    const divArea = document.createElement('div');
-    divArea.className = "area-mini-camisa";
-    divArea.title = `Nome: ${atleta.nomeCompleto} | Posição: ${atleta.posicao}`;
-
-    // Criar a mini camisa (copiando a estrutura HTML da grande)
-    const miniCamisaHTML = `
+    const card = document.createElement('div');
+    card.className = "card-atleta";
+    
+    card.innerHTML = `
         <div class="mini-camisa">
-            <div class="gola"></div>
             <span class="nome-camisa">${atleta.nomeCamisa}</span>
             <span class="numero-camisa">${atleta.numero}</span>
         </div>
+        <div class="atleta-info">
+            <h3>${atleta.nomeCompleto}</h3>
+            <p><strong> Origem:</strong> ${atleta.nacionalidade}</p>
+            <p><strong> Habilidade Marcante:</strong> ${atleta.habilidade}</p>
+            <p><strong> Posição:</strong> ${atleta.posicao} (${atleta.idade} anos)</p>
+            <p class="atleta-bio">"${atleta.resumo}"</p>
+        </div>
     `;
-
-    divArea.innerHTML = miniCamisaHTML;
-
-    // Adicionar ao grid
-    gridElenco.appendChild(divArea);
+    gridElenco.appendChild(card);
 }
 
 function limparFormulario() {
-    inNomeCompleto.value = "";
-    inNomeCamisa.value = "";
-    inNumero.value = "";
-    inIdade.value = "";
-    // Reseta o preview
+    [inNomeCompleto, inNomeCamisa, inNumero, inIdade, inNacionalidade, inHabilidade, inResumo].forEach(input => input.value = "");
     printNome.innerText = "SEU NOME";
     printNumero.innerText = "?";
     printIdade.innerText = "--";

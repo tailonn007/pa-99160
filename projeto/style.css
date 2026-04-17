@@ -1,224 +1,44 @@
 /* --- Reset e Fontes --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Oswald', 'Arial Black', sans-serif; /* Fonte mais 'esportiva' */
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Oswald', sans-serif; }
+body { background-color: #121212; color: white; padding: 20px; }
 
-body {
-    background-color: #121212; /* Fundo super escuro */
-    color: white;
-    padding: 20px;
-}
+/* --- Header com Logo --- */
+header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #333; padding-bottom: 20px; }
+.logo-header { width: 100px; height: auto; filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2)); }
+header p { color: #aaa; text-transform: uppercase; letter-spacing: 1px; margin-top: 10px; }
 
-header {
-    text-align: center;
-    margin-bottom: 30px;
-    border-bottom: 2px solid #333;
-    padding-bottom: 15px;
-}
+/* --- Layout --- */
+.main-container { display: flex; gap: 30px; justify-content: center; max-width: 1200px; margin: 0 auto 40px auto; flex-wrap: wrap; }
+.painel-controle, .preview-container { background: #1e1e1e; padding: 25px; border-radius: 15px; flex: 1; min-width: 320px; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
 
-header h1 {
-    color: #f1c40f; /* Amarelo Ouro */
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
+h2 { border-left: 5px solid #27ae60; padding-left: 10px; margin-bottom: 20px; text-transform: uppercase; font-size: 1.2rem; }
 
-/* --- Layout Principal --- */
-.main-container {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto 40px auto;
-    flex-wrap: wrap; /* Ajuste para celular */
-}
-
-/* --- Painel de Controle --- */
-.painel-controle, .preview-container {
-    background: #1e1e1e;
-    padding: 25px;
-    border-radius: 15px;
-    flex: 1;
-    min-width: 320px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-}
-
-h2 {
-    color: #fff;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-size: 1.2rem;
-    border-left: 5px solid #27ae60;
-    padding-left: 10px;
-}
-
-.form-group { margin-bottom: 15px; }
+.form-group { margin-bottom: 12px; }
 .form-group-row { display: flex; gap: 15px; }
+label { display: block; margin-bottom: 5px; color: #aaa; font-size: 0.85rem; }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    color: #aaa;
-    font-size: 0.9rem;
-}
+input, select, textarea { width: 100%; padding: 10px; background: #2d2d2d; border: 2px solid #444; border-radius: 8px; color: white; transition: 0.3s; }
+textarea { resize: none; }
+input:focus, select:focus, textarea:focus { border-color: #27ae60; outline: none; }
 
-input, select {
-    width: 100%;
-    padding: 12px;
-    background: #2d2d2d;
-    border: 2px solid #444;
-    border-radius: 8px;
-    color: white;
-    font-size: 1rem;
-    transition: 0.3s;
-}
+button { width: 100%; padding: 15px; background-color: #27ae60; color: white; border: none; border-radius: 8px; font-size: 1.2rem; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-top: 10px; }
+button:hover { background-color: #2ecc71; transform: translateY(-3px); }
 
-input:focus, select:focus {
-    border-color: #27ae60;
-    outline: none;
-}
+/* --- Preview Camisa Grande --- */
+.camisa-vazia { width: 200px; height: 240px; background-color: #df0000; border-radius: 10px 10px 0 0; position: relative; margin: 0 auto 15px auto; transition: transform 0.5s ease; border: 1px solid #020081; }
+.gola { width: 60px; height: 30px; background-color: #1e1e1e; border: 5px solid #020081; border-radius: 0 0 50px 50px; position: absolute; top: 0; left: 50%; transform: translateX(-50%); }
+.nome-camisa-preview { position: absolute; top: 55px; width: 100%; text-align: center; color: white; font-size: 18px; font-weight: bold; text-transform: uppercase; }
+.numero-camisa-preview { position: absolute; top: 85px; width: 100%; text-align: center; color: white; font-size: 90px; font-weight: bold; }
 
-/* O "Nome na Camisa" deve ser sempre maiúsculo */
-#nomeCamisa {
-    text-transform: uppercase;
-    font-weight: bold;
-    color: #f1c40f;
-}
+/* --- Grid do Elenco --- */
+.grid-elenco { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; margin-top: 20px; }
+.card-atleta { background: #2a2a2a; padding: 15px; border-radius: 12px; display: flex; align-items: center; gap: 15px; border: 1px solid #444; }
 
-button {
-    width: 100%;
-    padding: 15px;
-    background-color: #27ae60;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    cursor: pointer;
-    text-transform: uppercase;
-    transition: 0.3s;
-    margin-top: 10px;
-}
+.mini-camisa { width: 80px; height: 96px; background-color: #ad0000; border-radius: 4px; position: relative; border: 1px solid rgb(0, 108, 181); flex-shrink: 0; overflow: hidden; }
+.mini-camisa .nome-camisa { position: absolute; width: 100%; text-align: center; font-size: 9px; color: white; bottom: 42px; text-transform: uppercase; font-weight: bold; }
+.mini-camisa .numero-camisa { position: absolute; width: 100%; text-align: center; font-weight: bold; color: white; bottom: 10px; font-size: 32px; line-height: 32px; }
 
-button:hover {
-    background-color: #2ecc71;
-    transform: translateY(-3px);
-}
-
-/* --- A MÁGICA DA CAMISA (Preview) --- */
-.preview-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.camisa-vazia {
-    width: 200px;
-    height: 240px;
-    background-color: #df0000; /* Cor principal da camisa */
-    border-radius: 10px 10px 0 0;
-    position: relative;
-    margin-bottom: 15px;
-    box-shadow: 0 10px 15px rgba(0,0,0,0.3);
-    transition: transform 0.5s ease; /* Animação quando troca */
-}
-
-/* Detalhes da Camisa (Gola e Mangas) */
-.gola {
-    width: 60px; height: 30px;
-    background-color: #1e1e1e; /* Cor do fundo pra simular buraco */
-    border: 5px solid #020081; /* Cor do detalhe da gola */
-    border-radius: 0 0 50px 50px;
-    position: absolute; top: 0; left: 50%;
-    transform: translateX(-50%);
-}
-
-.manga-esq, .manga-dir {
-    width: 50px; height: 100px;
-    background-color:#df0000 ;
-    border-bottom: 10px solid #020081; /* Detalhe da manga */
-    position: absolute; top: 10px;
-}
-.manga-esq { left: -35px; border-radius: 10px 0 0 10px; transform: rotate(-15deg); }
-.manga-dir { right: -35px; border-radius: 0 10px 10px 0; transform: rotate(15deg); }
-
-/* Texto na Camisa */
-.nome-camisa {
-    position: absolute;
-    top: 50px;
-    width: 100%;
-    text-align: center;
-    color: #1e3799; /* Cor do texto (Nome) */
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.numero-camisa {
-    position: absolute;
-    top: 80px;
-    width: 100%;
-    text-align: center;
-    color: #1e3799; /* Cor do texto (Número) */
-    font-size: 90px;
-    font-weight: bold;
-    line-height: 1;
-}
-
-.info-adicional { color: #888; font-size: 0.9rem; }
-.info-adicional span { color: white; font-weight: bold; }
-
-/* --- Lista de Escalados (Grid) --- */
-.elenco-container {
-    background: #1e1e1e;
-    padding: 25px;
-    border-radius: 15px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.grid-elenco {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
-}
-
-/* Miniatura da camisa escalada */
-.mini-camisa {
-    width: 80px;
-    height: 96px;
-    background-color: #ad0000;
-    border-radius: 4px;
-    position: relative;
-    border: 1px solid rgb(0, 108, 181);
-}
-
-/* Nome */
-.nome {
-    position: absolute;
-    bottom: 28px; /* controla altura do nome */
-    width: 100%;
-    text-align: center;
-    font-size: 10px;
-    color: blue;
-}
-
-/* Número */
-.numero {
-    position: absolute;
-    bottom: 5px; /* mais pra baixo */
-    width: 100%;
-    text-align: center;
-    font-size: 28px;
-    font-weight: bold;
-    color: blue;
-}
-
-
-.mini-camisa .nome-camisa { font-size: 8px; top: 20px; }
-.mini-camisa .numero-camisa { font-size: 36px; top: 32px; }
+.atleta-info { flex: 1; }
+.atleta-info h3 { color: #f1c40f; font-size: 1.1rem; text-transform: uppercase; margin-bottom: 5px; }
+.atleta-info p { font-size: 0.85rem; color: #ccc; margin: 2px 0; }
+.atleta-bio { font-style: italic; color: #888 !important; margin-top: 5px !important; font-size: 0.8rem; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
