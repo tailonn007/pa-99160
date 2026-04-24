@@ -1,86 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bahia - Fábrica de Craques</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body>
-
-    <header>
-        <div class="header-content">
-            <img src="src/assets/logo.png" alt="Logo Bahia" class="logo-header">
-        </div>
-        <p> Escale seu time</p>
-    </header>
-
-    <main class="main-container">
-        <section class="painel-controle">
-            <h2>1. Dados do Atleta</h2>
-            <div class="form-group">
-                <label>Nome Completo:</label>
-                <input type="text" id="nomeAtleta" placeholder="Ex: Edson Arantes">
-            </div>
-            <div class="form-group">
-                <label>Nome na Camisa (Max 12 letras):</label>
-                <input type="text" id="nomeCamisa" placeholder="Ex: PELÉ" maxlength="12">
-            </div>
-            <div class="form-group-row">
-                <div class="form-group">
-                    <label>Idade:</label>
-                    <input type="number" id="idade" placeholder="20">
-                </div>
-                <div class="form-group">
-                    <label>Número:</label>
-                    <input type="number" id="numero" placeholder="10" min="1" max="99">
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Posição:</label>
-                <select id="posicao">
-                    <option value="Goleiro">Goleiro</option>
-                    <option value="Zagueiro">Zagueiro</option>
-                    <option value="Lateral">Lateral</option>
-                    <option value="Meio-Campo">Meio-Campo</option>
-                    <option value="Atacante">Atacante</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Nacionalidade:</label>
-                <input type="text" id="nacionalidade" placeholder="Ex: Brasileiro">
-            </div>
-            <div class="form-group">
-                <label>Habilidade Principal:</label>
-                <input type="text" id="habilidade" placeholder="Ex: Drible Curto">
-            </div>
-            <div class="form-group">
-                <label>Minibio (Resumo):</label>
-                <textarea id="resumo" rows="2" placeholder="Resumo rápido do jogador..."></textarea>
-            </div>
-
-            <button id="btnEscalar">ESCALAR JOGADOR!</button>
-        </section>
-
-        <section class="preview-container">
-            <h2>2. Pré-visualização</h2>
-            <div class="camisa-vazia" id="camisaVisual">
-                <div class="gola"></div>
-                <div class="manga-esq"></div>
-                <div class="manga-dir"></div>
-                <span class="nome-camisa-preview" id="printNome">SEU NOME</span>
-                <span class="numero-camisa-preview" id="printNumero">?</span>
-            </div>
-            <p class="info-adicional">Idade: <span id="printIdade">--</span> | Posição: <span id="printPosicao">--</span></p>
-        </section>
-    </main>
-
-    <section class="elenco-container">
-        <h2>📋 Elenco Confirmado</h2>
-        <div class="grid-elenco" id="gridElenco"></div>
-    </section>
-
-    <script src="script.js"></script>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
+

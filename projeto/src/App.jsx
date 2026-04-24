@@ -1,16 +1,25 @@
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import Mensagem from './components/mensagem'
+import SobreNos from './components/infoJogador/SobreNos'
+import Home from './components/infoJogador/Home'
+import Header from './components/infoJogador/Header'
+import Footer from './components/infoJogador/Footer'
 
 function App() {
 
   return (
     <>
-      <h1>bem-vindo ao meu projeto!</h1>
-      <Mensagem />
-      <Mensagem />
-      <Mensagem />
-      <Mensagem />
-      <Mensagem />
+      <Header />
+      <main>
+        {/* qualquer pagina tera header e footer*/}
+        <Routes>
+          <Route path="/"element={<Home />}/>
+          <Route path="/sobre-nos"element={<SobreNos />}/>
+          {/* <Route path="/fale-conosco"element={<FaleConosco />}/> */}
+
+        </Routes>
+      </main>
+      <Footer />
     </>
   )
 }
