@@ -1,0 +1,89 @@
+/* Container principal da página */
+.produtos-container {
+  padding: 60px 20px;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Textos do topo */
+.produtos-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.produtos-header h1 {
+  color: #00f2fe; /* Cor ciano da sua marca */
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  font-weight: 800;
+}
+
+.produtos-header p {
+  color: #a0aec0;
+  font-size: 1.1rem;
+}
+
+/* Área que envolve os cartões */
+.cards-grid {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap; /* Se a tela for pequena, joga os cards pra linha de baixo */
+  justify-content: center;
+  max-width: 1000px;
+}
+
+/* Estilo individual de cada Cartão */
+.card-produto {
+  background-color: #111418; /* Fundo cinza bem escuro, quase preto */
+  border: 1px solid #2d3748; /* Borda sutil */
+  border-radius: 12px;
+  padding: 30px;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Efeito ao passar o mouse por cima do cartão */
+.card-produto:hover {
+  transform: translateY(-8px); /* Levanta o cartão um pouquinho */
+  border-color: #8b5cf6; /* A borda fica roxa */
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.2); /* Sombra neon roxa */
+}
+
+/* Textos dentro do cartão */
+.card-produto h3 {
+  color: #ffffff;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.card-produto p {
+  color: #cbd5e1;
+  line-height: 1.6;
+  margin-bottom: 25px;
+  font-size: 0.95rem;
+  flex-grow: 1; /* Empurra o botão sempre pro fundo do cartão */
+}
+
+/* Botão do cartão */
+.btn-produto {
+  background: transparent;
+  color: #00f2fe;
+  border: 1px solid #00f2fe;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+/* Efeito ao passar o mouse no botão */
+.btn-produto:hover {
+  background: #00f2fe;
+  color: #0b0d10; /* Texto escuro com fundo ciano */
+}
