@@ -1,0 +1,27 @@
+{
+  "name": "pa-99160",
+  "version": "1.0.0",
+  "description": "Trazendo possíveis mudanças do GitHub:\r ```\r git pull\r ```\r Adicionar arquivos para commit:\r ```\r git add .\r ```\r Criar ponto de versionamento:\r ```\r git commit  -m \"comandos básicos do git. \"\r ```\r enviar alteração para GitHub:\r ```\r git push",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tailonn007/pa-99160.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tailonn007/pa-99160/issues"
+  },
+  "homepage": "https://github.com/tailonn007/pa-99160#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "experss": "^0.0.1-security",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.37.8"
+  }
+}
