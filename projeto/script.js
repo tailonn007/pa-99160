@@ -1,109 +1,134 @@
-// --- BANCADAS DE DADOS EM MEMÓRIA ---
-let clientes = [];
-let motos = [];
-let carros = [];
+import express from 'express';
+import cors from 'cors';
+import { Sequelize, DataTypes } from 'sequelize'; // Importamos o Sequelize
 
-// ==========================================
-// LÓGICA DE CLIENTES
-// ==========================================
-function adicionarCliente() {
-    const id = document.getElementById('clienteId').value;
-    const nome = document.getElementById('clienteNome').value;
-    const cpf = document.getElementById('clienteCpf').value;
-    const email = document.getElementById('clienteEmail').value;
-    const telefone = document.getElementById('clienteTelefone').value;
+const app = express(); 
 
-    if (!id || !nome || !cpf || !email || !telefone) {
-        return alert("Preencha todos os 5 campos do Cliente!");
-    }
+app.use(express.json()); // Permite receber dados em JSON
+app.use(cors());         // Permite requisições do frontend em HTML
 
-    clientes.push({ id, nome, cpf, email, telefone });
+// ------------------------------------------------------------------
+// 1. CONFIGURAÇÃO E CONEXÃO COM O BANCO DE DADOS (MySQL)
+// ------------------------------------------------------------------
+// Ajustado para o nome do banco 'teste' e 'Sequelize' com S maiúsculo
+const sequelize = new Sequelize('teste', 'root', '', {
+    host: 'localhost',
+    dialect: 'mysql'
+});
 
-    document.getElementById('clienteId').value = '';
-    document.getElementById('clienteNome').value = '';
-    document.getElementById('clienteCpf').value = '';
-    document.getElementById('clienteEmail').value = '';
-    document.getElementById('clienteTelefone').value = '';
+// ------------------------------------------------------------------
+// 2. DEFINIÇÃO DOS MODELOS (Tabelas do Banco de Dados)
+// ------------------------------------------------------------------
+const Aluno = sequelize.define('Aluno', {
+    nome: DataTypes.STRING,
+    idade: DataTypes.INTEGER,
+    matricula: DataTypes.STRING,
+    email: DataTypes.STRING
+});
 
-    atualizarListaClientes();
-}
+const Professor = sequelize.define('Professor', {
+    nome: DataTypes.STRING,
+    departamento: DataTypes.STRING,
+    titulacao: DataTypes.STRING,
+    email: DataTypes.STRING
+});
 
-function atualizarListaClientes() {
-    const ul = document.getElementById('listaClientes');
-    ul.innerHTML = '';
-    clientes.forEach(c => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>ID:</strong> ${c.id} <br> <strong>Nome:</strong> ${c.nome} <br> <strong>CPF:</strong> ${c.cpf} <br> <strong>Email:</strong> ${c.email} <br> <strong>Tel:</strong> ${c.telefone}`;
-        ul.appendChild(li);
+const Curso = sequelize.define('Curso', {
+    nome: DataTypes.STRING,
+    duracao_semestres: DataTypes.INTEGER,
+    turno: DataTypes.STRING,
+    vagas: DataTypes.INTEGER
+});
+
+// ------------------------------------------------------------------
+// 3. FUNÇÃO GERADORA DE ROTAS (CRUD conectado ao Banco de Dados)
+// ------------------------------------------------------------------
+// Modificado para usar async/await, pois consultas ao banco demoram um tempo para responder
+const criarEndpointsCRUD = (rota, Model) => {
+    
+    // GET: Listar todos
+    app.get(rota, async (req, res) => {
+        try {
+            const dados = await Model.findAll();
+            res.json(dados);
+        } catch (error) {
+            res.status(500).json({ erro: error.message });
+        }
     });
-}
 
-// ==========================================
-// LÓGICA DE MOTOS
-// ==========================================
-function adicionarMoto() {
-    const id = document.getElementById('motoId').value;
-    const marca = document.getElementById('motoMarca').value;
-    const modelo = document.getElementById('motoModelo').value;
-    const cilindradas = document.getElementById('motoCilindradas').value;
-    const cor = document.getElementById('motoCor').value;
-
-    if (!id || !marca || !modelo || !cilindradas || !cor) {
-        return alert("Preencha todos os 5 campos da Moto!");
-    }
-
-    motos.push({ id, marca, modelo, cilindradas, cor });
-
-    document.getElementById('motoId').value = '';
-    document.getElementById('motoMarca').value = '';
-    document.getElementById('motoModelo').value = '';
-    document.getElementById('motoCilindradas').value = '';
-    document.getElementById('motoCor').value = '';
-
-    atualizarListaMotos();
-}
-
-function atualizarListaMotos() {
-    const ul = document.getElementById('listaMotos');
-    ul.innerHTML = '';
-    motos.forEach(m => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>ID:</strong> ${m.id} <br> <strong>Marca:</strong> ${m.marca} <br> <strong>Modelo:</strong> ${m.modelo} <br> <strong>CC:</strong> ${m.cilindradas} <br> <strong>Cor:</strong> ${m.cor}`;
-        ul.appendChild(li);
+    // GET: Buscar por ID
+    app.get(`${rota}/:id`, async (req, res) => {
+        try {
+            const item = await Model.findByPk(req.params.id);
+            item ? res.json(item) : res.status(404).json({ erro: "Registro não encontrado" });
+        } catch (error) {
+            res.status(500).json({ erro: error.message });
+        }
     });
-}
 
-// ==========================================
-// LÓGICA DE CARROS
-// ==========================================
-function adicionarCarro() {
-    const id = document.getElementById('carroId').value;
-    const marca = document.getElementById('carroMarca').value;
-    const modelo = document.getElementById('carroModelo').value;
-    const ano = document.getElementById('carroAno').value;
-    const placa = document.getElementById('carroPlaca').value;
-
-    if (!id || !marca || !modelo || !ano || !placa) {
-        return alert("Preencha todos os 5 campos do Carro!");
-    }
-
-    carros.push({ id, marca, modelo, ano, placa });
-
-    document.getElementById('carroId').value = '';
-    document.getElementById('carroMarca').value = '';
-    document.getElementById('carroModelo').value = '';
-    document.getElementById('carroAno').value = '';
-    document.getElementById('carroPlaca').value = '';
-
-    atualizarListaCarros();
-}
-
-function atualizarListaCarros() {
-    const ul = document.getElementById('listaCarros');
-    ul.innerHTML = '';
-    carros.forEach(c => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>ID:</strong> ${c.id} <br> <strong>Marca:</strong> ${c.marca} <br> <strong>Modelo:</strong> ${c.modelo} <br> <strong>Ano:</strong> ${c.ano} <br> <strong>Placa:</strong> ${c.placa}`;
-        ul.appendChild(li);
+    // POST: Criar novo item no banco
+    app.post(rota, async (req, res) => {
+        try {
+            const novoItem = await Model.create(req.body);
+            res.status(201).json(novoItem);
+        } catch (error) {
+            res.status(500).json({ erro: error.message });
+        }
     });
-}
+
+    // PUT: Atualizar existente no banco
+    app.put(`${rota}/:id`, async (req, res) => {
+        try {
+            const item = await Model.findByPk(req.params.id);
+            if (item) {
+                await item.update(req.body);
+                res.json(item);
+            } else {
+                res.status(404).json({ erro: "Registro não encontrado" });
+            }
+        } catch (error) {
+            res.status(500).json({ erro: error.message });
+        }
+    });
+
+    // DELETE: Apagar do banco
+    app.delete(`${rota}/:id`, async (req, res) => {
+        try {
+            const item = await Model.findByPk(req.params.id);
+            if (item) {
+                await item.destroy();
+                res.status(204).send(); 
+            } else {
+                res.status(404).json({ erro: "Registro não encontrado" });
+            }
+        } catch (error) {
+            res.status(500).json({ erro: error.message });
+        }
+    });
+};
+
+// ------------------------------------------------------------------
+// 4. INICIALIZANDO OS ENDPOINTS
+// ------------------------------------------------------------------
+criarEndpointsCRUD('/alunos', Aluno);
+criarEndpointsCRUD('/professores', Professor);
+criarEndpointsCRUD('/cursos', Curso);
+
+// ------------------------------------------------------------------
+// 5. SINCRONIZAR BANCO E LIGAR O SERVIDOR
+// ------------------------------------------------------------------
+const PORT = 3000;
+
+// O sequelize.sync() garante que as tabelas existam no MySQL antes do servidor aceitar requisições
+sequelize.sync({ alter: true }) 
+    .then(() => {
+        console.log('✅ Banco de dados conectado e sincronizado com sucesso!');
+        
+        app.listen(PORT, () => {
+            console.log(`🚀 Servidor rodando com sucesso na porta ${PORT}!`);
+            console.log(`Acesse http://localhost:${PORT}/alunos para testar.`);
+        });
+    })
+    .catch(error => {
+        console.error('❌ Não foi possível conectar ao banco de dados:', error);
+    });
